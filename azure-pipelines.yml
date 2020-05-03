@@ -28,3 +28,10 @@ steps:
     majorVersion: '1'
     minorVersion: '0'
     patchVersion: '0'
+
+# Package a project
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    packDestination: '$(Build.ArtifactStagingDirectory)'
