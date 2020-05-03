@@ -26,6 +26,12 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    versioningScheme: 'off'
 #- task: VSBuild@1
 #  inputs:
 #    solution: '$(solution)'
