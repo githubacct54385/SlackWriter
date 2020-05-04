@@ -27,5 +27,5 @@ steps:
   displayName: 'dotnet pack'
   inputs:
     command: 'pack'
-    packagesToPack: '**/*.csproj'
+    packagesToPack: 'SlackWriter.Core/SlackWriter.Core.csproj'
     packDestination: '$(Build.ArtifactStagingDirectory)'
