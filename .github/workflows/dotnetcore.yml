@@ -27,7 +27,7 @@ jobs:
       run: dotnet pack --configuration Release --no-build
     - shell: bash
       env:
-        PACKAGE-NUMBER: 1.0.5
-      run: cd ./SlackWriter.Core/bin/Release && dotnet nuget push SlackWriter.$PACKAGE-NUMBER.nupkg -k ${{secrets.NugetApiKey}} -s https://api.nuget.org/v3/index.json
+        PACKAGE_NUMBER: 1.0.5
+      run: cd ./SlackWriter.Core/bin/Release && dotnet nuget push SlackWriter.$PACKAGE_NUMBER.nupkg -k ${{secrets.NugetApiKey}} -s https://api.nuget.org/v3/index.json
         
         
