@@ -29,11 +29,17 @@ steps:
   displayName: dotnet pack
   inputs:
     command: 'pack'
+#- task: Bash@3
+#  displayName: 'dotnet nuget push'
+#  inputs:
+#    targetType: 'inline'
+#    script:
+#      # go to the output dir for the nuget package and push it to nuget
+#      cd /home/vsts/work/1/a &&
+#      dotnet nuget push SlackWriter.$(packageVersion).nupkg -k $(NugetApiKey) -s https://api.nuget.org/v3/index.json --skip-duplicate
+
 - task: Bash@3
-  displayName: 'dotnet nuget push'
+  displayName: 'run deploy script'
   inputs:
-    targetType: 'inline'
-    script:
-      # go to the output dir for the nuget package and push it to nuget
-      cd /home/vsts/work/1/a &&
-      dotnet nuget push SlackWriter.$(packageVersion).nupkg -k $(NugetApiKey) -s https://api.nuget.org/v3/index.json --skip-duplicate
+    filePath: 'deployAzPipelines.sh'
+    workingDirectory: '/home/vsts/work/1/s/'
