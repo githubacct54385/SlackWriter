@@ -24,8 +24,7 @@ steps:
     testRunTitle: 'dotnet test'
 
 - task: NuGetCommand@2
-  displayName: 'dotnet pack'
   inputs:
     command: 'pack'
-    packagesToPack: 'SlackWriter.Core/SlackWriter.Core.csproj'
-    packDestination: '$(Build.ArtifactStagingDirectory)'
+    packagesToPack: '**/*.csproj'
+    versioningScheme: 'off'
