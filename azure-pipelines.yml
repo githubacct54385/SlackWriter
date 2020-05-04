@@ -25,12 +25,20 @@ steps:
     testRunTitle: 'dotnet test'
 
 # Package a project
-- task: NuGetCommand@2
-  displayName: 'Nuget Pack'
+#- task: NuGetCommand@2
+#  displayName: 'Nuget Pack'
+#  inputs:
+#    command: 'pack'
+#    packagesToPack: '**/*.csproj'
+#    packDestination: '$(Build.ArtifactStagingDirectory)'
+- task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
-    packDestination: '$(Build.ArtifactStagingDirectory)'
+    configuration: '$(buildConfiguration)'
+    nobuild: true
+    versioningScheme: 'off'
+    
 
 
 #- task: NuGetCommand@2
