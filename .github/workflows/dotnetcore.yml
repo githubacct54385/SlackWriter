@@ -28,5 +28,7 @@ jobs:
     - shell: bash
       env:
         NugetApiKey: ${{secrets.NugetApiKey}}
-      run:
-        cd ./SlackWriter.Core/bin/Release && dotnet nuget push SlackWriter.1.0.4.nupkg -k $NugetApiKey -s https://api.nuget.org/v3/index.json
+        PACKAGENUMBER: 1.0.5
+      run: cd ./SlackWriter.Core/bin/Release && dotnet nuget push SlackWriter.$PACKAGENUMBER.nupkg -k $NugetApiKey -s https://api.nuget.org/v3/index.json
+        
+        
