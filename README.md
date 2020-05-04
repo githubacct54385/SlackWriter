@@ -1,6 +1,6 @@
 # SlackWriter
 
-A REST Client wrapper for POSTing text messages to a Slack Channel from a bot.
+A REST Client wrapper for POSTing text messages to a Slack Channel from a bot using Incoming Webhooks.
 
 ```cs
 string webhookSecret = "<YOUR-WEBHOOK-SECRET>";
