@@ -12,6 +12,8 @@ pool:
 variables:
   buildConfiguration: 'Release'
   artifactName: 'SlackWriterArtifact'
+  nugetPackageLoc: '/home/vsts/work/1/s/SlackWriter.Core/bin/Release'
+  packageVersion: '1.0.5'
 
 steps:
 - task: DotNetCoreCLI@2
@@ -33,4 +35,5 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      echo $PWD
+      cd $(nugetPackageLoc)
+      dotnet nuget push SlackWriter.$(packageVersion).nupkg -k $NUGETAPIKEY -s https://api.nuget.org/v3/index.json
