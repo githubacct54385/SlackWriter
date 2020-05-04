@@ -25,3 +25,5 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     - name: Pack
       run: dotnet pack --configuration Release --no-build
+    - name: Publish to Nuget
+      run: dotnet nuget push SlackWriter.1.0.3.nupkg -k {{secrets.NugetApiKey}} -s https://api.nuget.org/v3/index.json
