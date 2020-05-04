@@ -35,5 +35,4 @@ steps:
   inputs:
     targetType: 'inline'
     script:
-      echo $PWD
-      dotnet nuget push SlackWriter.$(packageVersion).nupkg -k $($NUGETAPIKEY) -s https://api.nuget.org/v3/index.json --skip-duplicate
+      echo $PWD && dotnet nuget push SlackWriter.$(packageVersion).nupkg -k $($NUGETAPIKEY) -s https://api.nuget.org/v3/index.json --skip-duplicate
