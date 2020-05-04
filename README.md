@@ -1,4 +1,5 @@
 # SlackWriter
+![.NET Core](https://github.com/githubacct54385/SlackWriter/workflows/.NET%20Core/badge.svg)
 
 A REST Client wrapper for POSTing text messages to a Slack Channel from a bot using Incoming Webhooks.
 
