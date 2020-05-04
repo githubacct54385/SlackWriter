@@ -12,34 +12,20 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    command: 'build'
+- task: DotNetCoreCLI@2
+  displayName: dotnet test
   inputs:
     command: 'test'
     testRunTitle: 'dotnet test'
-- task: NuGetCommand@2
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/*.csproj'
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '1'
-    minorVersion: '0'
-    patchVersion: '0'
 
-# Package a project
 - task: NuGetCommand@2
+  displayName: 'dotnet pack'
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
     packDestination: '$(Build.ArtifactStagingDirectory)'
-
-# Push a project
-- task: NuGetCommand@2
-  inputs:
-    command: 'push'
-    feedsToUse: 'config'
-    includeNugetOrg: true
-
