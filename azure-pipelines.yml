@@ -25,12 +25,9 @@ steps:
     testRunTitle: 'dotnet test'
 
 - task: DotNetCoreCLI@2
+  displayName: dotnet pack
   inputs:
     command: 'pack'
-    packagesToPack: '**/*.csproj'
-    configuration: '$(buildConfiguration)'
-    nobuild: true
-    versioningScheme: 'off'
 
 - task: Bash@3
   inputs:
