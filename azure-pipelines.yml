@@ -25,7 +25,6 @@ steps:
   inputs:
     command: 'test'
     testRunTitle: 'dotnet test'
-
 - task: DotNetCoreCLI@2
   displayName: dotnet pack
   inputs:
@@ -37,4 +36,4 @@ steps:
     script:
       # go to the output dir for the nuget package and push it to nuget
       cd /home/vsts/work/1/a &&
-      dotnet nuget push SlackWriter.$(packageVersion).nupkg -k $($NUGETAPIKEY) -s https://api.nuget.org/v3/index.json --skip-duplicate
+      dotnet nuget push SlackWriter.$(packageVersion).nupkg -k $(NugetApiKey) -s https://api.nuget.org/v3/index.json --skip-duplicate
