@@ -39,7 +39,16 @@ steps:
 #      dotnet nuget push SlackWriter.$(packageVersion).nupkg -k $(NugetApiKey) -s https://api.nuget.org/v3/index.json --skip-duplicate
 
 - task: Bash@3
-  displayName: 'run deploy script'
+  displayName: 'find deploy script'
   inputs:
-    filePath: 'deployAzPipelines.sh'
-    workingDirectory: '/home/vsts/work/1/s/'
+    targetType: 'inline'
+    script:
+      cd /home/vsts/work/1/s && ls
+
+      
+
+#- task: Bash@3
+#  displayName: 'run deploy script'
+#  inputs:
+#    filePath: 'deployAzPipelines.sh'
+#    workingDirectory: '/home/vsts/work/1/s/'
