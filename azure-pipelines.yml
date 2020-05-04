@@ -43,7 +43,7 @@ steps:
   inputs:
     targetType: 'inline'
     script:
-      cd /home/vsts/work/1/s && ls
+      cd $(Agent.BuildDirectory) && ls
 
       
 
