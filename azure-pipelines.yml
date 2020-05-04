@@ -24,15 +24,19 @@ steps:
     command: 'test'
     testRunTitle: 'dotnet test'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet pack'
+# Package a project
+- task: NuGetCommand@2
+  displayName: 'Nuget Pack'
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
-    nobuild: true
-    versioningScheme: 'off'
-- task: PublishPipelineArtifact@1
-  displayName: Publish Artifact
-  inputs:
-    targetPath: $(System.DefaultWorkingDirectory)
-    artifactName: $(artifactName)
+    packDestination: '$(Build.ArtifactStagingDirectory)'
+
+
+#- task: NuGetCommand@2
+#  displayName: 'nuget push'
+#  inputs:
+#    command: 'push'
+#    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+#    nuGetFeedType: 'internal'
+#    publishVstsFeed: '4b6b89b8-326a-4d57-9aa1-84d930b6dcb3'
