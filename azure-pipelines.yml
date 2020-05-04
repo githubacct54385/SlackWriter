@@ -4,47 +4,36 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- master
-
-pool:
-  vmImage: 'ubuntu-latest'
-
-variables:
-  buildConfiguration: 'Release'
-  artifactName: 'SlackWriterArtifact'
-
-steps:
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet build --configuration $(buildConfiguration)'
-  inputs:
-    command: 'build'
-- task: DotNetCoreCLI@2
-  displayName: dotnet test
-  inputs:
-    command: 'test'
-    testRunTitle: 'dotnet test'
-
-# Package a project
-#- task: NuGetCommand@2
-#  displayName: 'Nuget Pack'
-#  inputs:
-#    command: 'pack'
-#    packagesToPack: '**/*.csproj'
-#    packDestination: '$(Build.ArtifactStagingDirectory)'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/*.csproj'
-    configuration: '$(buildConfiguration)'
-    nobuild: true
-    versioningScheme: 'off'
-    
-
-
-#- task: NuGetCommand@2
-#  displayName: 'nuget push'
-#  inputs:
-#    command: 'push'
-#    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-#    nuGetFeedType: 'internal'
-#    publishVstsFeed: '4b6b89b8-326a-4d57-9aa1-84d930b6dcb3'
+  - master
+  
+  pool:
+    vmImage: 'ubuntu-latest'
+  
+  variables:
+    buildConfiguration: 'Release'
+    artifactName: 'SlackWriterArtifact'
+    nugetPackageLoc: '/home/vsts/work/1/s/SlackWriter.Core/bin/Release'
+    packageVersion: '1.0.6'
+  
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build --configuration $(buildConfiguration)'
+    inputs:
+      command: 'build'
+  - task: DotNetCoreCLI@2
+    displayName: dotnet test
+    inputs:
+      command: 'test'
+      testRunTitle: 'dotnet test'
+  - task: DotNetCoreCLI@2
+    displayName: dotnet pack
+    inputs:
+      command: 'pack'
+  - task: Bash@3
+    displayName: 'dotnet nuget push'
+    inputs:
+      targetType: 'inline'
+      script:
+        # go to the output dir for the nuget package and push it to nuget
+        cd /home/vsts/work/1/a &&
+        dotnet nuget push SlackWriter.$(packageVersion).nupkg -k $(NugetApiKey) -s https://api.nuget.org/v3/index.json --skip-duplicate
