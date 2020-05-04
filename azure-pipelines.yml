@@ -43,7 +43,7 @@ steps:
   inputs:
     targetType: 'inline'
     script:
-      cd $(Agent.BuildDirectory) && ls
+      cd $(Pipeline.Workspace) && ls
 
       
 
