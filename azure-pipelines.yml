@@ -11,6 +11,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  artifactName: 'SlackWriterArtifact'
 
 steps:
 - task: DotNetCoreCLI@2
@@ -23,8 +24,8 @@ steps:
     command: 'test'
     testRunTitle: 'dotnet test'
 
-- task: NuGetCommand@2
+- task: PublishPipelineArtifact@1
+  displayName: Publish Artifact
   inputs:
-    command: 'pack'
-    packagesToPack: '**/*.csproj'
-    versioningScheme: 'off'
+    targetPath: $(System.DefaultWorkingDirectory)
+    artifactName: $(artifactName)
