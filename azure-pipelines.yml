@@ -24,6 +24,13 @@ steps:
     command: 'test'
     testRunTitle: 'dotnet test'
 
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet pack'
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    nobuild: true
+    versioningScheme: 'off'
 - task: PublishPipelineArtifact@1
   displayName: Publish Artifact
   inputs:
