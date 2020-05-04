@@ -30,7 +30,9 @@ steps:
   displayName: dotnet pack
   inputs:
     command: 'pack'
-
 - task: Bash@3
+  displayName: 'dotnet nuget push'
   inputs:
-    filePath: './deployAzPipelines.sh'
+    targetType: 'inline'
+    script: |
+      dotnet nuget push SlackWriter.$(packageVersion).nupkg -k $($NUGETAPIKEY) -s https://api.nuget.org/v3/index.json --skip-duplicate
