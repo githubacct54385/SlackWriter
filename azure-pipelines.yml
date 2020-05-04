@@ -43,7 +43,7 @@ steps:
   inputs:
     targetType: 'inline'
     script:
-      cd $(Pipeline.Workspace) && ls
+      cd $(Pipeline.Workspace)/s && ls
 
       
 
