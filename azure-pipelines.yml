@@ -24,13 +24,6 @@ steps:
     command: 'test'
     testRunTitle: 'dotnet test'
 
-# Package a project
-#- task: NuGetCommand@2
-#  displayName: 'Nuget Pack'
-#  inputs:
-#    command: 'pack'
-#    packagesToPack: '**/*.csproj'
-#    packDestination: '$(Build.ArtifactStagingDirectory)'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
@@ -38,13 +31,9 @@ steps:
     configuration: '$(buildConfiguration)'
     nobuild: true
     versioningScheme: 'off'
-    
 
-
-#- task: NuGetCommand@2
-#  displayName: 'nuget push'
-#  inputs:
-#    command: 'push'
-#    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-#    nuGetFeedType: 'internal'
-#    publishVstsFeed: '4b6b89b8-326a-4d57-9aa1-84d930b6dcb3'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo $PWD
