@@ -4,6 +4,9 @@ using SlackWriter.Core.Models;
 
 namespace SlackWriter
 {
+  /// <summary>
+  /// Default implementation of the SlackActionHandler
+  /// </summary>
   public sealed class SlackActionHandlerImpl : ISlackActionHandler
   {
     private readonly Uri host = new Uri("https://hooks.slack.com");
