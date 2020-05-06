@@ -5,35 +5,35 @@
 
 trigger:
   - master
-  
+
 pool:
-  vmImage: 'ubuntu-latest'
-  
+  vmImage: "ubuntu-latest"
+
   variables:
-    buildConfiguration: 'Release'
-    artifactName: 'SlackWriterArtifact'
-    nugetPackageLoc: '/home/vsts/work/1/s/SlackWriter.Core/bin/Release'
-    packageVersion: '2.0.0'
-  
+    buildConfiguration: "Release"
+    artifactName: "SlackWriterArtifact"
+    nugetPackageLoc: "/home/vsts/work/1/s/SlackWriter.Core/bin/Release"
+    packageVersion: "3.0.0"
+
   steps:
-  - task: DotNetCoreCLI@2
-    displayName: 'dotnet build --configuration $(buildConfiguration)'
-    inputs:
-      command: 'build'
-  - task: DotNetCoreCLI@2
-    displayName: dotnet test
-    inputs:
-      command: 'test'
-      testRunTitle: 'dotnet test'
-  - task: DotNetCoreCLI@2
-    displayName: dotnet pack
-    inputs:
-      command: 'pack'
-  - task: Bash@3
-    displayName: 'dotnet nuget push'
-    inputs:
-      targetType: 'inline'
-      script:
-        # go to the output dir for the nuget package and push it to nuget
-        cd /home/vsts/work/1/a &&
-        dotnet nuget push SlackWriter.$(packageVersion).nupkg -k $(NugetApiKey) -s https://api.nuget.org/v3/index.json --skip-duplicate
+    - task: DotNetCoreCLI@2
+      displayName: "dotnet build --configuration $(buildConfiguration)"
+      inputs:
+        command: "build"
+    - task: DotNetCoreCLI@2
+      displayName: dotnet test
+      inputs:
+        command: "test"
+        testRunTitle: "dotnet test"
+    - task: DotNetCoreCLI@2
+      displayName: dotnet pack
+      inputs:
+        command: "pack"
+    - task: Bash@3
+      displayName: "dotnet nuget push"
+      inputs:
+        targetType: "inline"
+        script:
+          # go to the output dir for the nuget package and push it to nuget
+          cd /home/vsts/work/1/a &&
+          dotnet nuget push SlackWriter.$(packageVersion).nupkg -k $(NugetApiKey) -s https://api.nuget.org/v3/index.json --skip-duplicate
