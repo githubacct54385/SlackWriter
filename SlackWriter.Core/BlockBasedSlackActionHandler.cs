@@ -14,7 +14,7 @@ namespace SlackWriter
       RestClient client = new RestClient(host);
       RestRequest request = new RestRequest(path, Method.POST, DataFormat.Json);
 
-      request.AddJsonBody(new { message });
+      request.AddJsonBody(message);
 
       IRestResponse response = client.Execute(request);
       if (response.IsSuccessful)

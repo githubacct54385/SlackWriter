@@ -13,7 +13,7 @@ pool:
     buildConfiguration: "Release"
     artifactName: "SlackWriterArtifact"
     nugetPackageLoc: "/home/vsts/work/1/s/SlackWriter.Core/bin/Release"
-    packageVersion: "3.0.0"
+    packageVersion: "3.0.1"
 
   steps:
     - task: DotNetCoreCLI@2
